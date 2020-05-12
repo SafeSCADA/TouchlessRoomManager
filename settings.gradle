@@ -1,0 +1,2 @@
+rootProject.name='Touchless Room Vacancy'
+include ':app'
