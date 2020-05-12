@@ -3321,12 +3321,12 @@
                 {
                     "source": "C:\\Users\\x\\Desktop\\TouchlessRoomManager\\app\\src\\main\\res\\values\\arrays.xml",
                     "from": {
-                        "startLines": "16,25,-1,-1",
-                        "startColumns": "4,4,-1,-1",
-                        "startOffsets": "423,684,-1,-1",
-                        "endLines": "23,32,-1,-1",
-                        "endColumns": "19,19,-1,-1",
-                        "endOffsets": "676,889,-1,-1"
+                        "startLines": "-1,25,-1,-1",
+                        "startColumns": "-1,4,-1,-1",
+                        "startOffsets": "-1,684,-1,-1",
+                        "endLines": "-1,32,-1,-1",
+                        "endColumns": "-1,19,-1,-1",
+                        "endOffsets": "-1,889,-1,-1"
                     },
                     "to": {
                         "startLines": "2,10,18,24",

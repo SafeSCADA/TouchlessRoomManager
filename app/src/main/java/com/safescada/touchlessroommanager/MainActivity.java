@@ -2,9 +2,11 @@ package com.safescada.touchlessroommanager;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.preference.PreferenceManager;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -14,6 +16,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -29,6 +32,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private Float sensorValue;
     private Integer longWaveTime;
     private ProgressBar pbarWaveProgress;
+    private ImageView imgArrowP;
+    private ImageView imgArrowL;
     public Boolean riseTrigger;
     public Boolean fallTrigger;
     public long waveProgress;
@@ -50,6 +55,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         textOccupancyView = findViewById(R.id.textStat2);
         textSensorView = findViewById(R.id.textSensorValue);
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        imgArrowP = (ImageView) findViewById(R.id.imgArrowP);
+        imgArrowL = (ImageView) findViewById(R.id.imgArrowL);
         pbarWaveProgress = (ProgressBar) findViewById(R.id.progressWave);
 
 
@@ -64,12 +71,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         personCount = 0; // assume no people in on startup
         personLimit = 2; // TODO change this to user configurable
-        longWaveTime = 1;
+        longWaveTime = 1000;
         riseTrigger = false;
         fallTrigger = false;
 
-        roomEmpty(); // vacant to start with
-
+        loadSettings(); // Load all config from settings page
     }
 
     @Override
@@ -99,7 +105,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             fallTrigger = false;
             riseTrigger = false;
             waveTime = fallTime - riseTime;
-            if (waveTime < longWaveTime * 1000000000)
+            if (waveTime < longWaveTime * 1000000)
             {
                 fallTime = 0;
                 riseTime = 0;
@@ -123,6 +129,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         {
             sensorManager.registerListener(this, proximitySensor, SensorManager.SENSOR_DELAY_NORMAL);
         }
+
+        loadSettings(); // Move to onClose
+
     }
 
     @Override
@@ -200,7 +209,49 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     public void textStat2_onClick(View view) {
         Intent intent=new Intent(this, SettingsActivity.class);
         startActivity(intent);
+
+
     }
 
+    public void loadSettings() {
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean showArrowTrigger = prefs.getBoolean("showSensorArrow", true);
+        boolean showDebugTrigger = prefs.getBoolean("showDebugInfo", false);
+
+        if (!showDebugTrigger) {
+            if (textSensorView != null) {
+                textSensorView.setVisibility(View.INVISIBLE);
+            }
+        } else {
+            if (textSensorView != null) {
+                textSensorView.setVisibility(View.VISIBLE);
+            }
+        }
+        if (!showArrowTrigger) {
+
+            if (imgArrowP != null) {
+                imgArrowP.setVisibility(View.INVISIBLE); // TODO: these don't work
+            }
+            if (imgArrowL  != null) {
+                imgArrowL.setVisibility(View.INVISIBLE);
+            }
+
+        } else {
+            if (imgArrowP != null) {
+                imgArrowP.setVisibility(View.VISIBLE);
+            }
+            if (imgArrowL  != null) {
+                imgArrowL.setVisibility(View.VISIBLE);
+            }
+        }
+
+        personLimit = Integer.parseInt(prefs.getString("personLimit", "2"));
+        longWaveTime = Integer.parseInt(prefs.getString("waveholdLimit", "1000"));
+
+        // Reset person count and show room vacant:
+        personCount = 0;
+        roomEmpty();
+    }
 
 }

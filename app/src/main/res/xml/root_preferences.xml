@@ -7,7 +7,7 @@
             app:entries="@array/personlimit_entries"
             app:entryValues="@array/personlimit_values"
             app:key="personLimit"
-            app:title="@string/person_limit_title"/>
+            app:title="@string/person_limit_title" />
 
         <ListPreference
             app:entries="@array/wavehold_entries"

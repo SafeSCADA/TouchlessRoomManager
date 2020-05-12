@@ -876,8 +876,8 @@ id icon_frame
 id icon_group
 id ifRoom
 id image
-id imageView
-id imageView2
+id imgArrowL
+id imgArrowP
 id info
 id invisible
 id italic
