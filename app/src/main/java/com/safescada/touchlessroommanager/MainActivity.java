@@ -10,8 +10,10 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
@@ -25,13 +27,14 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private Integer personLimit;
     private Float sensorValue;
     private Integer longWaveTime;
+    private ProgressBar pbarWaveProgress;
     public Boolean riseTrigger;
     public Boolean fallTrigger;
+    public long waveProgress;
     public long riseTime;
     public long fallTime;
     public long waveTime;
     ConstraintLayout layout;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +49,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         textOccupancyView = findViewById(R.id.textStat2);
         textSensorView = findViewById(R.id.textSensorValue);
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        pbarWaveProgress = (ProgressBar) findViewById(R.id.progressWave);
+
+
         if (sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY)!=null)
         {
             proximitySensor = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
@@ -56,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         }
 
         personCount = 0; // assume no people in on startup
-        personLimit = 3; // TODO change this to user configurable
+        personLimit = 2; // TODO change this to user configurable
         longWaveTime = 1;
         riseTrigger = false;
         fallTrigger = false;
@@ -69,7 +75,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     public void onSensorChanged(SensorEvent sensorEvent) {
 
         sensorValue = sensorEvent.values[0];
-        textSensorView.setText("sensor value " + sensorValue + " cm");
         if (sensorValue == 0 && !fallTrigger) {
             if (!riseTrigger)
             {
@@ -77,14 +82,19 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             }
             riseTrigger = true;
         }
+        if (sensorValue == 0) {
+            startProgressBar(riseTime);
+        }
 
+        textSensorView.setText("sensor value " + sensorValue + " cm held for " + waveProgress + " falltime: " + fallTime + " risetime: " + riseTime + " sensortime: " + sensorEvent.timestamp);
         if (sensorValue > 0 && riseTrigger) {
             fallTime = sensorEvent.timestamp;
             fallTrigger = true;
         }
 
         if (sensorValue > 0 && riseTrigger && fallTrigger) {
-
+            //pbarWaveProgress.setProgress(0); // Disabled due to OnSensor change difference in VM and device
+            pbarWaveProgress.setVisibility(View.INVISIBLE);
             fallTrigger = false;
             riseTrigger = false;
             waveTime = fallTime - riseTime;
@@ -165,7 +175,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         }
         if (personCount >= personLimit) {
             roomFull();
-        }else {
+        } else {
             roomOccupied();
         }
     }
@@ -176,9 +186,14 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         }
         if (personCount == 0) {
             roomEmpty();
-        }else {
+        } else {
                 roomOccupied();
         }
+    }
+    public void startProgressBar(long riseTime) {
+        // TODO: Change back to horizontal type and use the riseTime in a thread to set progress.
+        pbarWaveProgress.setVisibility(View.VISIBLE);
+
     }
 
 }

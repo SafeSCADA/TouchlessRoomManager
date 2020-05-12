@@ -1,4 +1,4 @@
-com.safescada.touchlessroomvacancy
+com.safescada.touchlessroommanager
 anim abc_fade_in
 anim abc_fade_out
 anim abc_grow_fade_in_from_bottom
@@ -659,6 +659,7 @@ drawable btn_radio_off_mtrl
 drawable btn_radio_off_to_on_mtrl_animation
 drawable btn_radio_on_mtrl
 drawable btn_radio_on_to_off_mtrl_animation
+drawable circle
 drawable ic_launcher_background
 drawable ic_launcher_foreground
 drawable notification_action_background
@@ -772,6 +773,8 @@ id icon
 id icon_group
 id ifRoom
 id image
+id imageView
+id imageView2
 id info
 id invisible
 id italic
@@ -796,6 +799,7 @@ id packed
 id parent
 id parentPanel
 id percent
+id progressWave
 id progress_circular
 id progress_horizontal
 id radio
