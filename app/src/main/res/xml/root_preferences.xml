@@ -1,0 +1,33 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="@string/config_header">
+
+        <ListPreference
+            app:entries="@array/personlimit_entries"
+            app:entryValues="@array/personlimit_values"
+            app:key="personLimit"
+            app:title="@string/person_limit_title"/>
+
+        <ListPreference
+            app:entries="@array/wavehold_entries"
+            app:entryValues="@array/wavehold_values"
+            app:key="waveholdLimit"
+            app:title="@string/wavehold_title" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/help_header">
+
+        <SwitchPreferenceCompat
+            app:key="showSensorArrow"
+            app:title="@string/show_sensor_arrow_title"
+            />
+
+        <SwitchPreferenceCompat
+            app:key="showDebugInfo"
+            app:title="@string/show_debug_info_title" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

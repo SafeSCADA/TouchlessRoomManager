@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "C:\\Users\\x\\Desktop\\TouchlessRoomManager\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-sw360dp-v13\\values-sw360dp-v13.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\x\\.gradle\\caches\\transforms-2\\files-2.1\\b51cfc6e08706d6b728f3e609e48654f\\preference-1.1.0-rc01\\res\\values-sw360dp-v13\\values-sw360dp-v13.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "71",
+                        "endOffsets": "122"
+                    }
+                }
+            ]
+        }
+    ]
+}

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -195,5 +196,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         pbarWaveProgress.setVisibility(View.VISIBLE);
 
     }
+
+    public void textStat2_onClick(View view) {
+        Intent intent=new Intent(this, SettingsActivity.class);
+        startActivity(intent);
+    }
+
 
 }

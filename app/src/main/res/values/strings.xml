@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">Touchless Room Manager</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Preference Titles -->
+    <string name="config_header">Configuration</string>
+    <string name="help_header">Help</string>
+
+    <!-- Messages Preferences -->
+    <string name="person_limit_title">Person Limit</string>
+    <string name="wavehold_title">Wave and hold time</string>
+
+    <!-- Sync Preferences -->
+    <string name="show_sensor_arrow_title">Show sensor arrow</string>
+    <string name="show_debug_info_title">Show debug info</string>
+
 </resources>

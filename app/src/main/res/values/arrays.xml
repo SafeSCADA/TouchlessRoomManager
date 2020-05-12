@@ -1,0 +1,34 @@
+<resources>
+    <!-- Wave hold Preference -->
+    <string-array name="wavehold_entries">
+        <item>0.5 seconds</item>
+        <item>1 second</item>
+        <item>1.5 seconds</item>
+        <item>2 seconds</item>
+    </string-array>
+
+    <string-array name="wavehold_values">
+        <item>500</item>
+        <item>1000</item>
+        <item>1500</item>
+        <item>2000</item>
+    </string-array>
+
+    <string-array name="personlimit_entries">
+        <item>1 person</item>
+        <item>2 persons</item>
+        <item>3 persons</item>
+        <item>4 persons</item>
+        <item>5 persons</item>
+        <item>6 persons</item>
+    </string-array>
+
+    <string-array name="personlimit_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+    </string-array>
+</resources>
